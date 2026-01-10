@@ -5,23 +5,42 @@ const resultDisplay = document.getElementById('resultDisplay');
 const playerScoreDisplay = document.getElementById('playerScoreDisplay');
 const computerScoreDisplay = document.getElementById('computerScoreDisplay');
 const resetButton = document.getElementById('resetButton');
+const playAgainButton = document.getElementById('playAgainButton');
 
 let playerScore = 0;
 let computerScore = 0;
+const maxScore = 5;
+let gameOver = false;
 
-resetButton.addEventListener('click', resetScores);
+function playAgain() {
+    gameOver = false;
+    resetScores();
+    resultDisplay.textContent = "Let's play again!";
+}
+
+function disableButtons() {
+    document.querySelectorAll('.choices button').forEach(btn => btn.disabled = true);
+}
+
+function enableButtons() {
+    document.querySelectorAll('.choices button').forEach(btn => btn.disabled = false);
+}
 
 function resetScores() {
+    gameOver = false;
     playerScore = 0;
     computerScore = 0;
     playerScoreDisplay.textContent = playerScore;
     computerScoreDisplay.textContent = computerScore;
     resultDisplay.textContent = "Scores Reset!";
     resultDisplay.classList.remove("greenText", "redText");
+    enableButtons();
+    playAgainButton.style.display = 'none';
 }
 
 
 function playGame(playerChoice) {
+    if (gameOver) return;
     playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
     const computerChoice = choices[Math.floor(Math.random() * 3)];
     let result = "";
@@ -64,5 +83,20 @@ function playGame(playerChoice) {
     } else if (result === "You lose") {
         computerScore++;
         computerScoreDisplay.textContent = computerScore;
+    }
+
+    // Check for game end
+    if (playerScore >= maxScore) {
+        gameOver = true;
+        resultDisplay.textContent = "🎉 You won the game! 🎉";
+        resultDisplay.classList.add("greenText");
+        disableButtons();
+        playAgainButton.style.display = 'block';
+    } else if (computerScore >= maxScore) {
+        gameOver = true;
+        resultDisplay.textContent = "😞 Computer won the game! 😞";
+        resultDisplay.classList.add("redText");
+        disableButtons();
+        playAgainButton.style.display = 'block';
     }
 }     
