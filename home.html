@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to Rock-Paper-Scissors Game!</h1> 
+    <h1>Welcome to Rock-Paper-Scissors Game!</h1>
+    <p style="font-size: 1.2rem; margin-bottom: 20px;">First to 5 wins!</p>
     <div class="choices">    
        <button onclick="playGame('rock')">👊</button>
        <button onclick="playGame('paper')">✋</button>
@@ -22,9 +23,8 @@
         <div class="scoreDisplay">Computer Score: <span id="computerScoreDisplay">0</span></div>
     </div>
 
-    <button id="resetButton">Reset Scores</button>
-
-    <footer>
+    <button id="resetButton" onclick="resetScores()">Reset Scores</button>
+    <button id="playAgainButton" style="display:none;" onclick="playAgain()">Play Again</button>
         <p>© 2026 . All rights reserved. Designed & Developed by Wesley</p>        
     </footer>
 
