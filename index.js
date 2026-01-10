@@ -1,0 +1,68 @@
+const choices = ['Rock', 'Paper', 'Scissors'];
+const playerDisplay = document.getElementById('playerDisplay');
+const computerDisplay = document.getElementById('computerDisplay');
+const resultDisplay = document.getElementById('resultDisplay');
+const playerScoreDisplay = document.getElementById('playerScoreDisplay');
+const computerScoreDisplay = document.getElementById('computerScoreDisplay');
+const resetButton = document.getElementById('resetButton');
+
+let playerScore = 0;
+let computerScore = 0;
+
+resetButton.addEventListener('click', resetScores);
+
+function resetScores() {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+    resultDisplay.textContent = "Scores Reset!";
+    resultDisplay.classList.remove("greenText", "redText");
+}
+
+
+function playGame(playerChoice) {
+    playerChoice = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
+    const computerChoice = choices[Math.floor(Math.random() * 3)];
+    let result = "";
+
+    if (playerChoice === computerChoice) {
+        result = "It's a Tie!";
+    }
+    else {
+        switch(playerChoice){
+            case "Rock":
+                result = (computerChoice === "Scissors") ? "You Win!" : "You lose";
+                break;
+            case "Paper":
+                result = (computerChoice === "Rock") ? "You Win!" : "You lose";
+                break;
+            case "Scissors":
+                result = (computerChoice === "Paper") ? "You Win!" : "You lose";
+                break;
+        }
+    }
+
+    playerDisplay.textContent = `Player: ${playerChoice}`;
+    computerDisplay.textContent = `Computer: ${computerChoice}`;
+    resultDisplay.textContent = result;
+
+    resultDisplay.classList.remove("greenText", "redText");
+   
+    switch(result) {
+        case "You Win!":
+            resultDisplay.classList.add("greenText");
+            break;
+        case "You lose":
+            resultDisplay.classList.add("redText");
+            break;
+    }
+
+    if (result === "You Win!") {
+        playerScore++;
+        playerScoreDisplay.textContent = playerScore;
+    } else if (result === "You lose") {
+        computerScore++;
+        computerScoreDisplay.textContent = computerScore;
+    }
+}     
