@@ -139,3 +139,31 @@ footer p {
         margin: 5px 0;
     }
 }
+
+@media (max-width: 390px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .choices button {
+        font-size: 3.5rem;
+        min-width: 80px;
+        margin: 0 3px;
+    }
+    #playerDisplay, #computerDisplay {
+        font-size: 1.5rem;
+        padding: 8px 16px;
+    }
+    #resultDisplay {
+        font-size: 1.8rem;
+        padding: 12px 24px;
+    }
+    .scoreDisplay {
+        font-size: 1.2rem;
+        padding: 8px 16px;
+    }
+    #resetButton, #playAgainButton {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+        margin-top: 15px;
+    }
+}
